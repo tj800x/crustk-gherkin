@@ -10,15 +10,19 @@ Feature: Create a Venture
 
     Scenario: A user creates a new Venture
         Given <Name> has an account on a the DLT
-        And his account balance is at least <VentureTransactionCost>
+        And his account balance is sufficient
         When he initates the 'Create Venture' command
         And he specifies the <VentureName>
+	And he specifies the <CashMultipler>
+	And he specifies the <NonCashMultiplier>
         And the <VentureName> has not previously been used
-        Then the DLT should subtract <VentureTransactionCost> from his balance
-        And the new Venture should be created
+        Then the new Venture should be created
         And <Name> should be given managerial rights over the venture
+	And the CashMultipler property should be set to <CashMultiplier>
+	And the NonCashMultipler property should be set to <NonCashMultiplier>
         
         Examples:
-        | Name       | VentureTransactionCost | VentureName |
-        | Marty      | 500 bytes              | Spacewars   |
+        | Name     | VentureName   | CashMultiplier | NonCashMultiplier |
+        | Marty    | Spacewars     | 4.0            | 2.0               |
+	
 		
